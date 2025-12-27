@@ -1,0 +1,13 @@
+pandas
+numpy
+yfinance
+statsmodels
+plotly
+streamlit
+scikit-learn
+openpyxl
+jupyter
+fpdf
+folium
+geopy
+pdfplumber

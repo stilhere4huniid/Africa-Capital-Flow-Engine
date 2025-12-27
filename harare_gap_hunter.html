@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5943f5acc55f527548e8cef3d32ee2d4 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_5943f5acc55f527548e8cef3d32ee2d4" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5943f5acc55f527548e8cef3d32ee2d4 = L.map(
+                "map_5943f5acc55f527548e8cef3d32ee2d4",
+                {
+                    center: [-17.795, 31.08],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_ee0879adaecd5f91a49c0106c30d7abc = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_ee0879adaecd5f91a49c0106c30d7abc.addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var heat_map_2ec3c125cff17175fcf1ba1dfff6fe8c = L.heatLayer(
+                [[-17.72, 31.13, 1.0], [-17.78, 31.05, 0.8], [-17.88, 31.24, 0.9], [-17.78, 30.95, 0.9], [-17.83, 31.1, 0.7], [-18.006715106442986, 31.080902528010935, 0.8]],
+                {
+  "minOpacity": 0.5,
+  "maxZoom": 18,
+  "radius": 25,
+  "blur": 15,
+  "gradient": {
+  0.4: "blue",
+  0.65: "lime",
+  1: "red",
+},
+}
+            );
+        
+    
+            heat_map_2ec3c125cff17175fcf1ba1dfff6fe8c.addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var marker_f3f6a03ffd5b26a090c963975d0c923a = L.marker(
+                [-17.761731382494474, 31.0869205512889],
+                {
+}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var icon_bbf91e714484ccaae8841fa99470c198 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c39e8de90d4df4a52e8ea8180ce2138f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a5a3b300e7711364fb87af01eb9d1981 = $(`<div id="html_a5a3b300e7711364fb87af01eb9d1981" style="width: 100.0%; height: 100.0%;"><div style='width:150px'><b>Borrowdale Village Walk</b><br>Operational (Anchor: Pick n Pay)</div></div>`)[0];
+                popup_c39e8de90d4df4a52e8ea8180ce2138f.setContent(html_a5a3b300e7711364fb87af01eb9d1981);
+            
+        
+
+        marker_f3f6a03ffd5b26a090c963975d0c923a.bindPopup(popup_c39e8de90d4df4a52e8ea8180ce2138f)
+        ;
+
+        
+    
+    
+                marker_f3f6a03ffd5b26a090c963975d0c923a.setIcon(icon_bbf91e714484ccaae8841fa99470c198);
+            
+    
+            var circle_b80b78ece1747fdf5424451a8b6b8cf6 = L.circle(
+                [-17.761731382494474, 31.0869205512889],
+                {"bubblingMouseEvents": true, "color": "#0066cc", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#0066cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var marker_9b271dedf81b1d5cce6aa573f2bb7b6a = L.marker(
+                [-17.79684412486667, 31.099360549725017],
+                {
+}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var icon_b726e60c56839091032aac5a90e2ef23 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_62c8e1fe9e282725ae0ecc81a873e3d5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0da0dab934a2302d2e553f93db799c82 = $(`<div id="html_0da0dab934a2302d2e553f93db799c82" style="width: 100.0%; height: 100.0%;"><div style='width:150px'><b>Highland Park (Ph1 & Ph2)</b><br>Operational (Anchor: Pick n Pay)</div></div>`)[0];
+                popup_62c8e1fe9e282725ae0ecc81a873e3d5.setContent(html_0da0dab934a2302d2e553f93db799c82);
+            
+        
+
+        marker_9b271dedf81b1d5cce6aa573f2bb7b6a.bindPopup(popup_62c8e1fe9e282725ae0ecc81a873e3d5)
+        ;
+
+        
+    
+    
+                marker_9b271dedf81b1d5cce6aa573f2bb7b6a.setIcon(icon_b726e60c56839091032aac5a90e2ef23);
+            
+    
+            var circle_0538ed90114ac1aee8d7df12f281239d = L.circle(
+                [-17.79684412486667, 31.099360549725017],
+                {"bubblingMouseEvents": true, "color": "#0066cc", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#0066cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var marker_d9230238cee4f9ea82a2e28c4238062d = L.marker(
+                [-17.77865594513171, 31.12673240285413],
+                {
+}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var icon_895e73bb6cb729c211e3f1b161631a48 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a9d65ba0fe577cbc634ac49965f403ed = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d8261382b67dfb4dc9e2f2e51a42dab0 = $(`<div id="html_d8261382b67dfb4dc9e2f2e51a42dab0" style="width: 100.0%; height: 100.0%;"><div style='width:150px'><b>Cardinal's Corner</b><br>Development (Anchor: Spar)</div></div>`)[0];
+                popup_a9d65ba0fe577cbc634ac49965f403ed.setContent(html_d8261382b67dfb4dc9e2f2e51a42dab0);
+            
+        
+
+        marker_d9230238cee4f9ea82a2e28c4238062d.bindPopup(popup_a9d65ba0fe577cbc634ac49965f403ed)
+        ;
+
+        
+    
+    
+                marker_d9230238cee4f9ea82a2e28c4238062d.setIcon(icon_895e73bb6cb729c211e3f1b161631a48);
+            
+    
+            var circle_5f8c867e40dbd70b8295383328ff96af = L.circle(
+                [-17.77865594513171, 31.12673240285413],
+                {"bubblingMouseEvents": true, "color": "#0066cc", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#0066cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var marker_3c2852446d4ad225d6d3fb27f45352ae = L.marker(
+                [-17.81768105658674, 31.047830339643234],
+                {
+}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var icon_f57225319a6e1dce14109e7562fcaae8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_953941e02a4a5ac8eb4e47f8a63f5ac7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c0b45cb83bd7ce692d8e1056d9676cc9 = $(`<div id="html_c0b45cb83bd7ce692d8e1056d9676cc9" style="width: 100.0%; height: 100.0%;"><div style='width:150px'><b>Chinamano Corner</b><br>Operational (Anchor: Puma)</div></div>`)[0];
+                popup_953941e02a4a5ac8eb4e47f8a63f5ac7.setContent(html_c0b45cb83bd7ce692d8e1056d9676cc9);
+            
+        
+
+        marker_3c2852446d4ad225d6d3fb27f45352ae.bindPopup(popup_953941e02a4a5ac8eb4e47f8a63f5ac7)
+        ;
+
+        
+    
+    
+                marker_3c2852446d4ad225d6d3fb27f45352ae.setIcon(icon_f57225319a6e1dce14109e7562fcaae8);
+            
+    
+            var circle_6d119f8a12017df81095a848208f1580 = L.circle(
+                [-17.81768105658674, 31.047830339643234],
+                {"bubblingMouseEvents": true, "color": "#0066cc", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#0066cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var marker_d6bd9c1b59919ef80488d45bbec75526 = L.marker(
+                [-17.829955899263425, 31.02520161080814],
+                {
+}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var icon_6315574acbf66433e162b8cbd427c1bf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_54f64184a2af710d2ac9fd51679b557d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_01c2ad9a20250e639faaa373bb34bd59 = $(`<div id="html_01c2ad9a20250e639faaa373bb34bd59" style="width: 100.0%; height: 100.0%;"><div style='width:150px'><b>Greenfields Retail Centre</b><br>Operational (Belvedere)</div></div>`)[0];
+                popup_54f64184a2af710d2ac9fd51679b557d.setContent(html_01c2ad9a20250e639faaa373bb34bd59);
+            
+        
+
+        marker_d6bd9c1b59919ef80488d45bbec75526.bindPopup(popup_54f64184a2af710d2ac9fd51679b557d)
+        ;
+
+        
+    
+    
+                marker_d6bd9c1b59919ef80488d45bbec75526.setIcon(icon_6315574acbf66433e162b8cbd427c1bf);
+            
+    
+            var circle_da0bb70cccb568b1e8253f306b42785d = L.circle(
+                [-17.829955899263425, 31.02520161080814],
+                {"bubblingMouseEvents": true, "color": "#0066cc", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#0066cc", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var marker_a1f4c3ff8f2a39386ff751445cb004b1 = L.marker(
+                [-17.75947146725432, 31.089577529841723],
+                {
+}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var icon_c1fd76f073bbdd8fffde187b596e559b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "shopping-cart",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4524f374e0969e1891bbf83e5b5059fd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b81bbadbac6ccba32099872241542df1 = $(`<div id="html_b81bbadbac6ccba32099872241542df1" style="width: 100.0%; height: 100.0%;">Sam Levy's Village</div>`)[0];
+                popup_4524f374e0969e1891bbf83e5b5059fd.setContent(html_b81bbadbac6ccba32099872241542df1);
+            
+        
+
+        marker_a1f4c3ff8f2a39386ff751445cb004b1.bindPopup(popup_4524f374e0969e1891bbf83e5b5059fd)
+        ;
+
+        
+    
+    
+                marker_a1f4c3ff8f2a39386ff751445cb004b1.setIcon(icon_c1fd76f073bbdd8fffde187b596e559b);
+            
+    
+            var circle_1ba5a65f4d883acb6adf0442ef985900 = L.circle(
+                [-17.75947146725432, 31.089577529841723],
+                {"bubblingMouseEvents": true, "color": "#ff0000", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#ff0000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var marker_e20039e4fa6693b8fc73f22bce3facc8 = L.marker(
+                [-17.80244358127244, 31.03841003353702],
+                {
+}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var icon_b8f087dd180d7ae4e7f3a140f4ab1a33 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "shopping-cart",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d6a9968e6cc06596f07143a3a6163391 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_425e57dfb9de9306fef75f162bcd3c9c = $(`<div id="html_425e57dfb9de9306fef75f162bcd3c9c" style="width: 100.0%; height: 100.0%;">Avondale Shopping Centre</div>`)[0];
+                popup_d6a9968e6cc06596f07143a3a6163391.setContent(html_425e57dfb9de9306fef75f162bcd3c9c);
+            
+        
+
+        marker_e20039e4fa6693b8fc73f22bce3facc8.bindPopup(popup_d6a9968e6cc06596f07143a3a6163391)
+        ;
+
+        
+    
+    
+                marker_e20039e4fa6693b8fc73f22bce3facc8.setIcon(icon_b8f087dd180d7ae4e7f3a140f4ab1a33);
+            
+    
+            var circle_bce2fd9b6b1db12bcf0af4ffb938d887 = L.circle(
+                [-17.80244358127244, 31.03841003353702],
+                {"bubblingMouseEvents": true, "color": "#ff0000", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#ff0000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var marker_c484a7fb9d7bbfee5505cb0d923c942d = L.marker(
+                [-17.763000088225223, 30.978995487512506],
+                {
+}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var icon_553bce9d1542278a784a796214946d67 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "shopping-cart",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_21b9c9a1a7d775d0b019670f83594045 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_92eb0b68da787c7702864770cd6c9d3d = $(`<div id="html_92eb0b68da787c7702864770cd6c9d3d" style="width: 100.0%; height: 100.0%;">Westgate Shopping Mall</div>`)[0];
+                popup_21b9c9a1a7d775d0b019670f83594045.setContent(html_92eb0b68da787c7702864770cd6c9d3d);
+            
+        
+
+        marker_c484a7fb9d7bbfee5505cb0d923c942d.bindPopup(popup_21b9c9a1a7d775d0b019670f83594045)
+        ;
+
+        
+    
+    
+                marker_c484a7fb9d7bbfee5505cb0d923c942d.setIcon(icon_553bce9d1542278a784a796214946d67);
+            
+    
+            var circle_b566bd180aae97cf471e59c8467d5a9d = L.circle(
+                [-17.763000088225223, 30.978995487512506],
+                {"bubblingMouseEvents": true, "color": "#ff0000", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#ff0000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var marker_a92c33f4c691a7ef02d55ffcd7b6acb4 = L.marker(
+                [-17.76306483626415, 31.0508650642185],
+                {
+}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var icon_ff5785f033c7c599a1ed6920b16bd245 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "shopping-cart",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ea75570530e072ec0fd2a9a56b171b49 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_de6c8d6f646bec1eb948f3d50fc4ecd3 = $(`<div id="html_de6c8d6f646bec1eb948f3d50fc4ecd3" style="width: 100.0%; height: 100.0%;">Arundel Village</div>`)[0];
+                popup_ea75570530e072ec0fd2a9a56b171b49.setContent(html_de6c8d6f646bec1eb948f3d50fc4ecd3);
+            
+        
+
+        marker_a92c33f4c691a7ef02d55ffcd7b6acb4.bindPopup(popup_ea75570530e072ec0fd2a9a56b171b49)
+        ;
+
+        
+    
+    
+                marker_a92c33f4c691a7ef02d55ffcd7b6acb4.setIcon(icon_ff5785f033c7c599a1ed6920b16bd245);
+            
+    
+            var circle_2e5a5a74b4ae0e05fcf122368743fe72 = L.circle(
+                [-17.76306483626415, 31.0508650642185],
+                {"bubblingMouseEvents": true, "color": "#ff0000", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#ff0000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var marker_8460ed793723626f84e48f5e90cfed79 = L.marker(
+                [-17.81903580403664, 31.12130568352962],
+                {
+}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var icon_392a3bb1fb3ba50aa45f5ffb4acef8cf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "shopping-cart",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bf5cd626cfe3c1d8e60ac927d25baddc = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3beae4a89f0bca6b80d505fb2f0a151b = $(`<div id="html_3beae4a89f0bca6b80d505fb2f0a151b" style="width: 100.0%; height: 100.0%;">Greendale Shopping Centre</div>`)[0];
+                popup_bf5cd626cfe3c1d8e60ac927d25baddc.setContent(html_3beae4a89f0bca6b80d505fb2f0a151b);
+            
+        
+
+        marker_8460ed793723626f84e48f5e90cfed79.bindPopup(popup_bf5cd626cfe3c1d8e60ac927d25baddc)
+        ;
+
+        
+    
+    
+                marker_8460ed793723626f84e48f5e90cfed79.setIcon(icon_392a3bb1fb3ba50aa45f5ffb4acef8cf);
+            
+    
+            var circle_3734e03bda7cadcc84a164823d43c9aa = L.circle(
+                [-17.81903580403664, 31.12130568352962],
+                {"bubblingMouseEvents": true, "color": "#ff0000", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#ff0000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var marker_bae81d10e57a324a0c6ff00851f8e110 = L.marker(
+                [-17.78309145353249, 31.119837242771922],
+                {
+}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var icon_ee3d98db0256fbb5422d30a4f50edaba = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "shopping-cart",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_311fdc2b861635c783804f8890267562 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3e43ac9556f5eb4b472c35bef1bfbab2 = $(`<div id="html_3e43ac9556f5eb4b472c35bef1bfbab2" style="width: 100.0%; height: 100.0%;">Chisipite Shopping Centre</div>`)[0];
+                popup_311fdc2b861635c783804f8890267562.setContent(html_3e43ac9556f5eb4b472c35bef1bfbab2);
+            
+        
+
+        marker_bae81d10e57a324a0c6ff00851f8e110.bindPopup(popup_311fdc2b861635c783804f8890267562)
+        ;
+
+        
+    
+    
+                marker_bae81d10e57a324a0c6ff00851f8e110.setIcon(icon_ee3d98db0256fbb5422d30a4f50edaba);
+            
+    
+            var circle_a2b4c58de5d0155fd430553546204add = L.circle(
+                [-17.78309145353249, 31.119837242771922],
+                {"bubblingMouseEvents": true, "color": "#ff0000", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#ff0000", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var marker_0c336df0ae8e6a84d6196d8fcb203c1b = L.marker(
+                [-17.885, 31.245],
+                {
+}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var icon_627abeebeaa97c357ba61bd6360c8316 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cc937ee4016a6886c7522afe9d9510c8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d17f796f0fd40b3a08f11ef3325245b2 = $(`<div id="html_d17f796f0fd40b3a08f11ef3325245b2" style="width: 100.0%; height: 100.0%;"><b>RECOMMENDED SITE</b><br>Opportunity A: Ruwa Growth Point<br>Nearest Mall: 15.0km away</div>`)[0];
+                popup_cc937ee4016a6886c7522afe9d9510c8.setContent(html_d17f796f0fd40b3a08f11ef3325245b2);
+            
+        
+
+        marker_0c336df0ae8e6a84d6196d8fcb203c1b.bindPopup(popup_cc937ee4016a6886c7522afe9d9510c8)
+        ;
+
+        
+    
+    
+                marker_0c336df0ae8e6a84d6196d8fcb203c1b.setIcon(icon_627abeebeaa97c357ba61bd6360c8316);
+            
+    
+            var marker_bc17ef98f593895d0218b1f5f1f08dc4 = L.marker(
+                [-17.785, 30.955],
+                {
+}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var icon_5a83ae54cc8e6476a98ec9d8691e4970 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_964730762b71ca239898fba7180f92c7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_42933f4bc651f0a265d7931bc6e5d30b = $(`<div id="html_42933f4bc651f0a265d7931bc6e5d30b" style="width: 100.0%; height: 100.0%;"><b>RECOMMENDED SITE</b><br>Opportunity B: Madokero Estate<br>Nearest Mall: 3.5km away</div>`)[0];
+                popup_964730762b71ca239898fba7180f92c7.setContent(html_42933f4bc651f0a265d7931bc6e5d30b);
+            
+        
+
+        marker_bc17ef98f593895d0218b1f5f1f08dc4.bindPopup(popup_964730762b71ca239898fba7180f92c7)
+        ;
+
+        
+    
+    
+                marker_bc17ef98f593895d0218b1f5f1f08dc4.setIcon(icon_5a83ae54cc8e6476a98ec9d8691e4970);
+            
+    
+            var marker_21266713ec7b0cd21ffc1fde837f5731 = L.marker(
+                [-17.73, 31.08],
+                {
+}
+            ).addTo(map_5943f5acc55f527548e8cef3d32ee2d4);
+        
+    
+            var icon_79682603f2f27345eea12e29fae650b6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d73aff59d9dade559f32e8cca27788c4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f6b80ed8341539e8c999e74ad8c44470 = $(`<div id="html_f6b80ed8341539e8c999e74ad8c44470" style="width: 100.0%; height: 100.0%;"><b>RECOMMENDED SITE</b><br>Opportunity C: Pomona City<br>Nearest Mall: 3.4km away</div>`)[0];
+                popup_d73aff59d9dade559f32e8cca27788c4.setContent(html_f6b80ed8341539e8c999e74ad8c44470);
+            
+        
+
+        marker_21266713ec7b0cd21ffc1fde837f5731.bindPopup(popup_d73aff59d9dade559f32e8cca27788c4)
+        ;
+
+        
+    
+    
+                marker_21266713ec7b0cd21ffc1fde837f5731.setIcon(icon_79682603f2f27345eea12e29fae650b6);
+            
+</script>
+</html>
