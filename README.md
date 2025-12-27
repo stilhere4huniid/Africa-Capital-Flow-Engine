@@ -88,7 +88,7 @@ Africa-Capital-Flow-Engine/
 
 ---
 
-##⚠️ Known Limitations & Roadmap
+## ⚠️ Known Limitations & Roadmap
 **This project is a prototype. For enterprise deployment, the following upgrades are recommended:**
 1. Data Feeds: Replace yfinance (free scraper) with a Bloomberg Terminal API or Refinitiv Eikon ($25k/yr) for institutional-grade reliability.
 
