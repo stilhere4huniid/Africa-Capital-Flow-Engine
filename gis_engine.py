@@ -48,7 +48,8 @@ competitors = [
     {"name": "Westgate Shopping Mall", "loc": [-17.763000088225223, 30.978995487512506]},
     {"name": "Arundel Village", "loc": [-17.76306483626415, 31.0508650642185]},
     {"name": "Greendale Shopping Centre", "loc": [-17.81903580403664, 31.12130568352962]},
-    {"name": "Chisipite Shopping Centre", "loc": [-17.78309145353249, 31.119837242771922]}
+    {"name": "Chisipite Shopping Centre", "loc": [-17.78309145353249, 31.119837242771922]},
+    {"name": "Madokero Mall", "loc": [-17.79325310198947, 30.95903144092514]}
 ]
 
 # --- 2. THE DEMAND (Residential Heatmap Data) ---
