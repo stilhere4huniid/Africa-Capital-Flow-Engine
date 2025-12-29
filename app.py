@@ -195,8 +195,10 @@ with st.spinner(f"Running Econometric Models for {country}..."):
             full_df = pd.read_csv("data/semi_synthetic_fdi.csv")
             # 1. Filter by country
             df = full_df[full_df['Country'] == country].copy()
-            # 2. Add the missing 'Type' column so the app doesn't crash
+            
+            # 2. IMPORTANT: Add the 'Type' column so the charts don't crash
             df['Type'] = 'History' 
+            
             signal = "⚠️ CACHE MODE (Live Data Offline)"
         else:
             df = pd.DataFrame()
