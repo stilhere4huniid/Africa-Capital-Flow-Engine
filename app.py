@@ -264,25 +264,26 @@ fig.add_trace(go.Scatter(
     line=dict(color='#00CC96', width=2)
 ))
 
-# Forecast Line (Dashed)
-fig.add_trace(go.Scatter(
-    x=forecast.index, 
-    y=forecast['FDI_Inflows_MillionUSD'],
-    mode='lines',
-    name='VAR Forecast',
-    line=dict(color='#AB63FA', width=3, dash='dot')
-))
+if not forecast.empty:
+    # Forecast Line (Dashed)
+    fig.add_trace(go.Scatter(
+        x=forecast.index, 
+        y=forecast['FDI_Inflows_MillionUSD'],
+        mode='lines',
+        name='VAR Forecast',
+        line=dict(color='#AB63FA', width=3, dash='dot')
+    ))
 
-# Confidence Interval Look
-fig.add_trace(go.Scatter(
-    x=list(forecast.index) + list(forecast.index[::-1]),
-    y=list(forecast['FDI_Inflows_MillionUSD'] * 1.1) + list(forecast['FDI_Inflows_MillionUSD'] * 0.9)[::-1],
-    fill='toself',
-    fillcolor='rgba(171, 99, 250, 0.2)',
-    line=dict(color='rgba(255,255,255,0)'),
-    hoverinfo="skip",
-    showlegend=False
-))
+    # Confidence Interval Look
+    fig.add_trace(go.Scatter(
+        x=list(forecast.index) + list(forecast.index[::-1]),
+        y=list(forecast['FDI_Inflows_MillionUSD'] * 1.1) + list(forecast['FDI_Inflows_MillionUSD'] * 0.9)[::-1],
+        fill='toself',
+        fillcolor='rgba(171, 99, 250, 0.2)',
+        line=dict(color='rgba(255,255,255,0)'),
+        hoverinfo="skip",
+        showlegend=False
+    ))
 
 fig.update_layout(
     template="plotly_dark",
