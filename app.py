@@ -183,17 +183,20 @@ st.sidebar.info(
 st.title(f"📊 Market Intelligence: {country}")
 
 # Run the Engine
+# --- MAIN LOGIC in app.py ---
 with st.spinner(f"Running Econometric Models for {country}..."):
     try:
-        # Pass the horizon steps to your model engine
         df, signal = train_and_forecast(country, steps=steps)
     except Exception as e:
         st.error("Model Engine Error")
-        st.info("The system is currently unable to process new market signals due to API limits. Loading historical cache...")
-        # Fallback: Try to load the last generated CSV if the model fails
+        st.info("Yahoo Finance API is rate-limited. Loading historical cache...")
+        
         if os.path.exists("data/semi_synthetic_fdi.csv"):
             full_df = pd.read_csv("data/semi_synthetic_fdi.csv")
-            df = full_df[full_df['Country'] == country]
+            # 1. Filter by country
+            df = full_df[full_df['Country'] == country].copy()
+            # 2. Add the missing 'Type' column so the app doesn't crash
+            df['Type'] = 'History' 
             signal = "⚠️ CACHE MODE (Live Data Offline)"
         else:
             df = pd.DataFrame()
