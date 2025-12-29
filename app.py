@@ -8,15 +8,6 @@ import sys
 from fpdf import FPDF
 import datetime
 import os
-import yfinance as yf # Added
-from requests import Session # Added
-
-# --- 1. SESSION & BROWSER EMULATION ---
-# This helps prevent the YFRateLimitError by pretending to be a browser
-session = Session()
-session.headers.update({
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-})
 
 # --- PAGE CONFIG ---
 st.set_page_config(page_title="African Capital Flow Engine", layout="wide", page_icon="🌍")
@@ -141,29 +132,23 @@ def create_pdf(country, current_fdi, predicted_fdi, delta, signal, oil_corr, df)
 st.sidebar.title("🌍 Capital Flow Engine")
 st.sidebar.markdown("Predicting Cross-Border Real Estate Investment in Africa.")
 
-# 1. ENHANCED REFRESH BUTTON
+# 1. REFRESH BUTTON
 st.sidebar.subheader("⚙️ System Controls")
 if st.sidebar.button("🔄 Refresh Live Data"):
     with st.spinner("Connecting to Yahoo Finance API & Recalibrating Models..."):
+        # Use absolute path to ensure script is found
         current_dir = os.getcwd()
         script_path = os.path.join(current_dir, "data_generator.py")
         
         if os.path.exists(script_path):
-            # We pass the session context to the subprocess logic if possible, 
-            # but usually, the data_generator.py will handle its own session now.
             result = subprocess.run([sys.executable, script_path], capture_output=True, text=True)
-            
             if result.returncode == 0:
                 st.sidebar.success("Data Updated Successfully!")
-                # Force a rerun to reload the new CSV data
-                st.rerun() 
             else:
-                st.sidebar.error("API Rate Limit Hit!")
-                st.sidebar.warning("Yahoo Finance is limiting requests. Showing last available stable data.")
-                # Log the error for your own debugging
-                print(result.stderr) 
+                st.sidebar.error("Error updating data.")
+                st.sidebar.code(result.stderr)
         else:
-            st.sidebar.error(f"Script not found.")
+            st.sidebar.error(f"Script not found at: {script_path}")
 
 st.sidebar.markdown("---")
 
@@ -183,31 +168,13 @@ st.sidebar.info(
 st.title(f"📊 Market Intelligence: {country}")
 
 # Run the Engine
-# --- MAIN LOGIC in app.py ---
 with st.spinner(f"Running Econometric Models for {country}..."):
-    try:
-        df, signal = train_and_forecast(country, steps=steps)
-    except Exception as e:
-        st.error("Model Engine Error")
-        st.info("Yahoo Finance API is rate-limited. Loading historical cache...")
-        
-        if os.path.exists("data/semi_synthetic_fdi.csv"):
-            full_df = pd.read_csv("data/semi_synthetic_fdi.csv")
-            # 1. Filter by country
-            df = full_df[full_df['Country'] == country].copy()
-            
-            # 2. IMPORTANT: Add the 'Type' column so the charts don't crash
-            df['Type'] = 'History' 
-            
-            signal = "⚠️ CACHE MODE (Live Data Offline)"
-        else:
-            df = pd.DataFrame()
-            signal = "System Offline"
+    df, signal = train_and_forecast(country, steps=steps)
 
 # --- 🛑 SAFETY CHECK ---
 if df.empty:
-    st.error(f"⚠️ Data Feed Offline")
-    st.info("The Yahoo Finance Rate Limit is currently active for this server IP. Please try again in 30 minutes.")
+    st.error(f"⚠️ Model Failure: {signal}")
+    st.warning("This usually happens if the live data feed is incomplete or the country profile needs adjustment.")
     st.stop()
 # ---------------------
 
@@ -217,14 +184,8 @@ forecast = df[df['Type'] == 'Forecast']
 
 # Multiply by 12 to get the Annual Run-Rate
 current_fdi = history['FDI_Inflows_MillionUSD'].iloc[-1] * 12
-
-if not forecast.empty:
-    predicted_fdi = forecast['FDI_Inflows_MillionUSD'].iloc[-1] * 12
-    delta = ((predicted_fdi - current_fdi) / current_fdi) * 100
-else:
-    # Fallback if no forecast exists (Cache Mode)
-    predicted_fdi = current_fdi
-    delta = 0.0
+predicted_fdi = forecast['FDI_Inflows_MillionUSD'].iloc[-1] * 12
+delta = ((predicted_fdi - current_fdi) / current_fdi) * 100
 
 # --- KPI ROW ---
 c1, c2, c3, c4 = st.columns(4)
@@ -264,26 +225,25 @@ fig.add_trace(go.Scatter(
     line=dict(color='#00CC96', width=2)
 ))
 
-if not forecast.empty:
-    # Forecast Line (Dashed)
-    fig.add_trace(go.Scatter(
-        x=forecast.index, 
-        y=forecast['FDI_Inflows_MillionUSD'],
-        mode='lines',
-        name='VAR Forecast',
-        line=dict(color='#AB63FA', width=3, dash='dot')
-    ))
+# Forecast Line (Dashed)
+fig.add_trace(go.Scatter(
+    x=forecast.index, 
+    y=forecast['FDI_Inflows_MillionUSD'],
+    mode='lines',
+    name='VAR Forecast',
+    line=dict(color='#AB63FA', width=3, dash='dot')
+))
 
-    # Confidence Interval Look
-    fig.add_trace(go.Scatter(
-        x=list(forecast.index) + list(forecast.index[::-1]),
-        y=list(forecast['FDI_Inflows_MillionUSD'] * 1.1) + list(forecast['FDI_Inflows_MillionUSD'] * 0.9)[::-1],
-        fill='toself',
-        fillcolor='rgba(171, 99, 250, 0.2)',
-        line=dict(color='rgba(255,255,255,0)'),
-        hoverinfo="skip",
-        showlegend=False
-    ))
+# Confidence Interval Look
+fig.add_trace(go.Scatter(
+    x=list(forecast.index) + list(forecast.index[::-1]),
+    y=list(forecast['FDI_Inflows_MillionUSD'] * 1.1) + list(forecast['FDI_Inflows_MillionUSD'] * 0.9)[::-1],
+    fill='toself',
+    fillcolor='rgba(171, 99, 250, 0.2)',
+    line=dict(color='rgba(255,255,255,0)'),
+    hoverinfo="skip",
+    showlegend=False
+))
 
 fig.update_layout(
     template="plotly_dark",
