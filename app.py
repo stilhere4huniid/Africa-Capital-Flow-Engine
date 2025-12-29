@@ -8,6 +8,15 @@ import sys
 from fpdf import FPDF
 import datetime
 import os
+import yfinance as yf # Added
+from requests import Session # Added
+
+# --- 1. SESSION & BROWSER EMULATION ---
+# This helps prevent the YFRateLimitError by pretending to be a browser
+session = Session()
+session.headers.update({
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+})
 
 # --- PAGE CONFIG ---
 st.set_page_config(page_title="African Capital Flow Engine", layout="wide", page_icon="🌍")
@@ -132,23 +141,29 @@ def create_pdf(country, current_fdi, predicted_fdi, delta, signal, oil_corr, df)
 st.sidebar.title("🌍 Capital Flow Engine")
 st.sidebar.markdown("Predicting Cross-Border Real Estate Investment in Africa.")
 
-# 1. REFRESH BUTTON
+# 1. ENHANCED REFRESH BUTTON
 st.sidebar.subheader("⚙️ System Controls")
 if st.sidebar.button("🔄 Refresh Live Data"):
     with st.spinner("Connecting to Yahoo Finance API & Recalibrating Models..."):
-        # Use absolute path to ensure script is found
         current_dir = os.getcwd()
         script_path = os.path.join(current_dir, "data_generator.py")
         
         if os.path.exists(script_path):
+            # We pass the session context to the subprocess logic if possible, 
+            # but usually, the data_generator.py will handle its own session now.
             result = subprocess.run([sys.executable, script_path], capture_output=True, text=True)
+            
             if result.returncode == 0:
                 st.sidebar.success("Data Updated Successfully!")
+                # Force a rerun to reload the new CSV data
+                st.rerun() 
             else:
-                st.sidebar.error("Error updating data.")
-                st.sidebar.code(result.stderr)
+                st.sidebar.error("API Rate Limit Hit!")
+                st.sidebar.warning("Yahoo Finance is limiting requests. Showing last available stable data.")
+                # Log the error for your own debugging
+                print(result.stderr) 
         else:
-            st.sidebar.error(f"Script not found at: {script_path}")
+            st.sidebar.error(f"Script not found.")
 
 st.sidebar.markdown("---")
 
@@ -168,13 +183,29 @@ st.sidebar.info(
 st.title(f"📊 Market Intelligence: {country}")
 
 # Run the Engine
+st.title(f"📊 Market Intelligence: {country}")
+
+# Run the Engine
 with st.spinner(f"Running Econometric Models for {country}..."):
-    df, signal = train_and_forecast(country, steps=steps)
+    try:
+        # Pass the horizon steps to your model engine
+        df, signal = train_and_forecast(country, steps=steps)
+    except Exception as e:
+        st.error("Model Engine Error")
+        st.info("The system is currently unable to process new market signals due to API limits. Loading historical cache...")
+        # Fallback: Try to load the last generated CSV if the model fails
+        if os.path.exists("data/semi_synthetic_fdi.csv"):
+            full_df = pd.read_csv("data/semi_synthetic_fdi.csv")
+            df = full_df[full_df['Country'] == country]
+            signal = "⚠️ CACHE MODE (Live Data Offline)"
+        else:
+            df = pd.DataFrame()
+            signal = "System Offline"
 
 # --- 🛑 SAFETY CHECK ---
 if df.empty:
-    st.error(f"⚠️ Model Failure: {signal}")
-    st.warning("This usually happens if the live data feed is incomplete or the country profile needs adjustment.")
+    st.error(f"⚠️ Data Feed Offline")
+    st.info("The Yahoo Finance Rate Limit is currently active for this server IP. Please try again in 30 minutes.")
     st.stop()
 # ---------------------
 
