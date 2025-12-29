@@ -183,9 +183,6 @@ st.sidebar.info(
 st.title(f"📊 Market Intelligence: {country}")
 
 # Run the Engine
-st.title(f"📊 Market Intelligence: {country}")
-
-# Run the Engine
 with st.spinner(f"Running Econometric Models for {country}..."):
     try:
         # Pass the horizon steps to your model engine
