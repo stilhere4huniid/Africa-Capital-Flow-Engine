@@ -184,8 +184,16 @@ forecast = df[df['Type'] == 'Forecast']
 
 # Multiply by 12 to get the Annual Run-Rate
 current_fdi = history['FDI_Inflows_MillionUSD'].iloc[-1] * 12
-predicted_fdi = forecast['FDI_Inflows_MillionUSD'].iloc[-1] * 12
-delta = ((predicted_fdi - current_fdi) / current_fdi) * 100
+
+if not forecast.empty:
+    # This only runs if the API refresh worked
+    predicted_fdi = forecast['FDI_Inflows_MillionUSD'].iloc[-1] * 12
+    delta = ((predicted_fdi - current_fdi) / current_fdi) * 100
+else:
+    # This runs if Yahoo is blocked (Cache Mode)
+    # It prevents the IndexError by giving the app "safe" numbers to show
+    predicted_fdi = current_fdi
+    delta = 0.0
 
 # --- KPI ROW ---
 c1, c2, c3, c4 = st.columns(4)
